@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <meta name="theme-color" content="#07834b" />
+    <meta name="color-scheme" content="light" />
+    <meta name="description" content="Professional brand structured-data setup. Choose a Brand Schema Tag plan and apply for expert implementation for your business." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Brand Schema Tag — Structured Data Plans" />
+    <meta property="og:description" content="Help search engines understand your business with professionally implemented brand structured data." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Brand Schema Tag — Structured Data Plans</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#plans">Skip to plans</a>
+
+    <header class="hero">
+      <div class="hero__inner">
+        <h1>BRAND SCHEMA <span>TAG</span></h1>
+        <p class="hero__subtitle">Professional brand structured data setup</p>
+        <p class="hero__description">Improve how your business information is understood by search engines with professionally implemented structured data.</p>
+
+        <ol class="steps" aria-label="Application progress">
+          <li class="step is-current" data-step="1" aria-current="step"><span class="step__number">1.</span> Select Plan</li>
+          <li class="step" data-step="2"><span class="step__number">2.</span> Business Details</li>
+          <li class="step" data-step="3"><span class="step__number">3.</span> Application</li>
+        </ol>
+      </div>
+    </header>
+
+    <main id="plans" class="pricing" tabindex="-1">
+      <h2 class="sr-only">Choose your Brand Schema Tag plan</h2>
+      <div id="plan-grid" class="plan-grid"></div>
+      <noscript>
+        <div class="noscript-message">
+          <h2>Let’s get your brand set up.</h2>
+          <p>Plans are $200 for 1 year, $250 for 3 years, $350 for 5 years, and $500 for 10 years. Please enable JavaScript to select a plan and send your application securely.</p>
+        </div>
+      </noscript>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__brand">© <span id="year">2026</span> Brand Schema Tag</p>
+      <nav class="footer__nav" aria-label="Information and support">
+        <button type="button" data-information="privacy">Privacy Policy</button>
+        <button type="button" data-information="terms">Terms of Service</button>
+        <button type="button" data-information="support">Support</button>
+      </nav>
+      <p class="footer__disclaimer">This platform provides brand structured-data implementation services. Submitted information is processed for service delivery and support. Brand Schema Tag is an independent service and does not guarantee search rankings or search-engine results.</p>
+    </footer>
+
+    <dialog id="application-dialog" class="dialog application-dialog" aria-labelledby="application-title" aria-describedby="application-description">
+      <div class="dialog__scroll">
+        <button type="button" class="close-button" data-close-dialog aria-label="Close application form">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+        </button>
+
+        <div id="application-panel">
+          <div class="dialog__heading">
+            <p class="eyebrow">ONE STEP CLOSER</p>
+            <h2 id="application-title">Business details</h2>
+            <p id="application-description">Tell us a little about your store.<br />We’ll take it from here.</p>
+          </div>
+
+          <form id="application-form" novalidate>
+            <div class="selected-plan">
+              <p class="selected-plan__label">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4.5" y="8.5" width="11" height="8" rx="2" /><path d="M7 8.5V6a3 3 0 0 1 6 0v2.5" /></svg>
+                Your selected plan <span>· USD</span>
+              </p>
+              <div class="selected-plan__fields">
+                <div>
+                  <label for="selected-plan-name">Plan name</label>
+                  <input id="selected-plan-name" name="plan_name" type="text" readonly aria-readonly="true" />
+                </div>
+                <div>
+                  <label for="selected-plan-price">Plan price</label>
+                  <input id="selected-plan-price" name="plan_price" type="text" readonly aria-readonly="true" />
+                </div>
+              </div>
+            </div>
+
+            <fieldset id="application-fields" class="form-fields">
+              <legend class="sr-only">Your business contact details</legend>
+              <div class="field">
+                <label for="full-name">Full name</label>
+                <input id="full-name" name="name" type="text" autocomplete="name" placeholder="Your full name" minlength="2" maxlength="100" required autofocus />
+                <p id="name-error" class="field__error" hidden></p>
+              </div>
+              <div class="field">
+                <label for="email">Email address</label>
+                <input id="email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="you@example.com" maxlength="254" required />
+                <p id="email-error" class="field__error" hidden></p>
+              </div>
+              <div class="field">
+                <label for="store-url">Store URL</label>
+                <input id="store-url" name="store_url" type="url" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" placeholder="https://yourstore.com" maxlength="2048" aria-describedby="store-url-hint" required />
+                <p id="store-url-hint" class="field__hint">Your website or yourstore.myshopify.com</p>
+                <p id="store_url-error" class="field__error" hidden></p>
+              </div>
+              <div class="form-trap" aria-hidden="true">
+                <label for="company-website">Leave this field empty</label>
+                <input id="company-website" name="company_website" type="text" autocomplete="off" tabindex="-1" />
+              </div>
+            </fieldset>
+
+            <div id="form-error" class="form-message form-message--error" role="alert" hidden></div>
+            <p id="sending-status" class="sr-only" role="status" aria-live="polite"></p>
+
+            <button id="submit-application" type="submit" class="primary-button submit-button">
+              <span class="button-spinner" aria-hidden="true" hidden></span>
+              <span id="submit-label">Submit application</span>
+              <svg class="submit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
+            </button>
+            <p class="form-note">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m10 2 6 2.5V9c0 4-6 8-6 8S4 13 4 9V4.5L10 2Z" /><path d="m7.5 9 1.7 1.7 3.3-3.4" /></svg>
+              Your details are only used for your application.<br />No payment is collected here.
+            </p>
+          </form>
+        </div>
+
+        <section id="success-panel" class="success-panel" aria-labelledby="success-title" hidden>
+          <div class="success-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.3"><path d="m9 16 5 5 10-11" /></svg>
+          </div>
+          <p class="eyebrow">APPLICATION SENT</p>
+          <h2 id="success-title" tabindex="-1">You’re all set.</h2>
+          <p class="success-panel__message">Thanks for choosing Brand Schema Tag. Our team will contact you at <strong id="success-email"></strong> with the next steps.</p>
+          <dl class="success-summary">
+            <div><dt>Selected plan</dt><dd id="success-plan"></dd></div>
+            <div><dt>Plan price (USD)</dt><dd id="success-price"></dd></div>
+          </dl>
+          <p class="success-reference">Your reference: <strong id="success-reference"></strong></p>
+          <button type="button" class="primary-button" data-close-dialog>Back to plans</button>
+          <p class="success-panel__note">No payment has been collected.</p>
+        </section>
+      </div>
+    </dialog>
+
+    <dialog id="information-dialog" class="dialog information-dialog" aria-labelledby="information-title">
+      <div class="dialog__scroll">
+        <button type="button" class="close-button" data-close-dialog aria-label="Close information">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+        </button>
+        <div class="dialog__heading">
+          <p id="information-eyebrow" class="eyebrow"></p>
+          <h2 id="information-title" tabindex="-1"></h2>
+        </div>
+        <div id="information-content" class="information-content"></div>
+        <button type="button" class="primary-button" data-close-dialog>Back to plans</button>
+      </div>
+    </dialog>
+
+    <div id="notification" class="notification" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
