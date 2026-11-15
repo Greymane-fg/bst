@@ -42,7 +42,8 @@ const checkIcon = '<svg viewBox="0 0 20 24" fill="none" stroke="currentColor" st
 
 // Only static, trusted catalogue content is rendered as HTML. User data always uses textContent/value.
 planGrid.innerHTML = plans.map((plan) => `
-  <article class="plan-card" aria-labelledby="title-${plan.id}">
+  <article class="plan-card${plan.popular ? ' plan-card--popular' : ''}" aria-labelledby="title-${plan.id}"${plan.popular ? ` aria-describedby="popular-${plan.id}"` : ''}>
+    ${plan.popular ? `<span id="popular-${plan.id}" class="popular-badge">Most Popular</span>` : ''}
     <div class="plan-card__topline"><span class="discount">DISCOUNT ${formatPrice(plan.originalPrice - plan.price)}</span></div>
     <h3 id="title-${plan.id}">${plan.name}</h3>
     <div class="plan-card__price">

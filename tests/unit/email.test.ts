@@ -20,8 +20,8 @@ describe('EmailJS integration', () => {
   it('builds all documented template fields from the selected catalogue plan', () => {
     expect(buildTemplateParams(input, '5-years', 'BST-TEST', date)).toEqual({
       name: 'Ada Okafor', email: 'ada@example.com', reply_to: 'ada@example.com',
-      store_url: 'https://ada.myshopify.com/', plan_name: '5 YEARS PLAN', plan_price: '$350',
-      original_price: '$500', discount: '$150', currency: 'USD',
+      store_url: 'https://ada.myshopify.com/', plan_name: '5 YEARS PLAN', plan_price: '$400',
+      original_price: '$500', discount: '$100', currency: 'USD',
       application_id: 'BST-TEST', submitted_at: '2026-10-22T20:00:00.000Z',
     });
   });
@@ -36,10 +36,10 @@ describe('EmailJS integration', () => {
     expect(emailjs.send).toHaveBeenCalledOnce();
     expect(emailjs.send).toHaveBeenCalledWith(
       'service_bst001', 'template_o2jsmvp',
-      expect.objectContaining({ name: input.name, plan_name: '10 YEARS PLAN', plan_price: '$500' }),
+      expect.objectContaining({ name: input.name, plan_name: '10 YEARS PLAN', plan_price: '$550' }),
       { publicKey: 'DsZtpo1OyFI88CFGz' },
     );
-    expect(receipt).toMatchObject({ email: input.email, planName: '10 YEARS PLAN', planPrice: '$500' });
+    expect(receipt).toMatchObject({ email: input.email, planName: '10 YEARS PLAN', planPrice: '$550' });
     expect(receipt.reference).toMatch(/^BST-[A-F0-9]{12}$/);
   });
 

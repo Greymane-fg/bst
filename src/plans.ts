@@ -4,6 +4,7 @@ export interface Plan {
   readonly years: number;
   readonly price: number;
   readonly originalPrice: number;
+  readonly popular?: boolean;
   readonly features: readonly string[];
 }
 
@@ -26,7 +27,7 @@ export const plans: readonly Plan[] = Object.freeze([
     id: '3-years',
     name: '3 YEARS PLAN',
     years: 3,
-    price: 250,
+    price: 300,
     originalPrice: 350,
     features: Object.freeze([
       'Advanced Brand Schema setup',
@@ -39,7 +40,7 @@ export const plans: readonly Plan[] = Object.freeze([
     id: '5-years',
     name: '5 YEARS PLAN',
     years: 5,
-    price: 350,
+    price: 400,
     originalPrice: 500,
     features: Object.freeze([
       'Advanced structured data setup',
@@ -52,8 +53,9 @@ export const plans: readonly Plan[] = Object.freeze([
     id: '10-years',
     name: '10 YEARS PLAN',
     years: 10,
-    price: 500,
+    price: 550,
     originalPrice: 700,
+    popular: true,
     features: Object.freeze([
       'Complete Brand Schema setup',
       'Advanced Organization markup',

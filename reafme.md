@@ -31,9 +31,9 @@ Verify that the service is connected and authorised, the fixed recipient is corr
 | `{{reply_to}}` | The same validated applicant email; use in the Reply To setting |
 | `{{store_url}}` | Normalised HTTP(S) store URL, e.g. `https://ada.myshopify.com/` |
 | `{{plan_name}}` | Selected catalogue plan, e.g. `5 YEARS PLAN` |
-| `{{plan_price}}` | Selected discounted USD price, e.g. `$350` |
+| `{{plan_price}}` | Selected discounted USD price, e.g. `$400` |
 | `{{original_price}}` | Original USD price, e.g. `$500` |
-| `{{discount}}` | Savings, e.g. `$150` |
+| `{{discount}}` | Savings, e.g. `$100` |
 | `{{currency}}` | `USD` |
 | `{{application_id}}` | Reference shown to the applicant, e.g. `BST-ABC123DEF456` |
 | `{{submitted_at}}` | ISO 8601 timestamp in UTC |
@@ -134,7 +134,7 @@ Copy the entire code block into EmailJS’s HTML editor. The template uses inlin
 
 1. Save the template above and confirm the fixed **To Email** recipient.
 2. Deploy the site over HTTPS, or run `npm run dev` locally. Add that exact origin to your EmailJS allowed-origin settings if restrictions are enabled.
-3. Select each plan and check its locked values: **1 year $200**, **3 years $250**, **5 years $350**, **10 years $500**.
+3. Select each plan and check its locked values: **1 year $200**, **3 years $300**, **5 years $400**, **10 years $550**. Only the 10-year plan should display the **Most Popular** tag.
 4. With an email address and store URL you control, submit one application.
 5. Confirm the on-screen success, the EmailJS delivery history, and the received email (including spam). Check the name, email, store URL, selected plan and price, reference, and timestamp. Use Reply to verify the reply address.
 6. If delivery fails, inspect the service authorisation, template ID, origin restrictions, quota, and recipient in EmailJS. The website preserves form entries and allows retry; HTTP 429 asks the visitor to wait.

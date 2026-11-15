@@ -4,10 +4,10 @@ import AxeBuilder from '@axe-core/playwright';
 
 const endpoint = 'https://api.emailjs.com/api/v1.0/email/send';
 const catalogue = [
-  { years: 1, name: '1 YEAR PLAN', price: '$200' },
-  { years: 3, name: '3 YEARS PLAN', price: '$250' },
-  { years: 5, name: '5 YEARS PLAN', price: '$350' },
-  { years: 10, name: '10 YEARS PLAN', price: '$500' },
+  { years: 1, name: '1 YEAR PLAN', price: '$200', originalPrice: '$250', discount: '$50' },
+  { years: 3, name: '3 YEARS PLAN', price: '$300', originalPrice: '$350', discount: '$50' },
+  { years: 5, name: '5 YEARS PLAN', price: '$400', originalPrice: '$500', discount: '$100' },
+  { years: 10, name: '10 YEARS PLAN', price: '$550', originalPrice: '$700', discount: '$150' },
 ];
 
 async function choosePlan(page: Page, years = 1): Promise<void> {
@@ -27,21 +27,41 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
 
-test('matches all four reference plans and their features', async ({ page }) => {
+test('renders current plan prices, recalculated discounts, and all features', async ({ page }) => {
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('BRAND SCHEMA TAG');
   await expect(page.getByRole('article')).toHaveCount(4);
   for (const plan of catalogue) {
     const card = page.getByRole('article', { name: plan.name, exact: true });
-    await expect(card).toContainText(plan.price);
+    await expect(card.locator('.current-price')).toContainText(plan.price);
+    await expect(card.locator('.original-price')).toContainText(plan.originalPrice);
+    await expect(card.getByText(`DISCOUNT ${plan.discount}`, { exact: true })).toBeVisible();
     await expect(card.getByRole('listitem')).toHaveCount(4);
     await expect(card.getByRole('button', { name: `Select ${plan.years}-year plan for ${plan.price}` })).toBeVisible();
   }
   await expect(page.getByText('Maximum implementation support', { exact: true })).toBeVisible();
 });
 
+test('shows Most Popular only on the $550 10-year plan', async ({ page }) => {
+  const popularCard = page.getByRole('article', { name: '10 YEARS PLAN', exact: true });
+  await expect(page.getByText('Most Popular', { exact: true })).toHaveCount(1);
+  await expect(popularCard.getByText('Most Popular', { exact: true })).toBeVisible();
+  await expect(popularCard.locator('.current-price')).toContainText('$550');
+  await expect(popularCard).toHaveAccessibleDescription(/most popular/i);
+  for (const plan of catalogue.filter((plan) => plan.years !== 10)) {
+    await expect(page.getByRole('article', { name: plan.name, exact: true }).locator('.popular-badge')).toHaveCount(0);
+  }
+});
+
 for (const width of [320, 390, 494, 768, 1440]) {
   test(`has no horizontal overflow at ${width}px and a usable modal`, async ({ page }) => {
     await page.setViewportSize({ width, height: 844 });
+    const badge = page.getByText('Most Popular', { exact: true });
+    await expect(badge).toBeVisible();
+    expect(await badge.evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      const discount = element.closest('article')!.querySelector('.discount')!.getBoundingClientRect();
+      return bounds.left >= 0 && bounds.right <= window.innerWidth && bounds.bottom <= discount.top;
+    })).toBe(true);
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     await choosePlan(page, 5);
     await expect(page.getByLabel('Plan name', { exact: true })).toHaveValue('5 YEARS PLAN');
@@ -99,14 +119,14 @@ test('sends all contact details with the trusted selected plan, not altered DOM 
     service_id: 'service_bst001', template_id: 'template_o2jsmvp', user_id: 'DsZtpo1OyFI88CFGz',
     template_params: {
       name: 'Ada Okafor', email: 'ada@example.com', reply_to: 'ada@example.com',
-      store_url: 'https://ada.myshopify.com/', plan_name: '10 YEARS PLAN', plan_price: '$500',
-      original_price: '$700', discount: '$200', currency: 'USD',
+      store_url: 'https://ada.myshopify.com/', plan_name: '10 YEARS PLAN', plan_price: '$550',
+      original_price: '$700', discount: '$150', currency: 'USD',
       application_id: expect.stringMatching(/^BST-[A-F0-9]{12}$/),
       submitted_at: expect.any(String),
     },
   });
   await expect(page.locator('#success-plan')).toHaveText('10 YEARS PLAN');
-  await expect(page.locator('#success-price')).toHaveText('$500');
+  await expect(page.locator('#success-price')).toHaveText('$550');
   await expect(page.locator('#success-email')).toHaveText('ada@example.com');
   await page.getByRole('button', { name: 'Back to plans', exact: true }).click();
   await choosePlan(page, 3);
@@ -165,7 +185,7 @@ test('shows a useful offline error without sending', async ({ page, context }) =
 });
 
 test('supports keyboard dismissal, restores focus and scroll, and allows backdrop dismissal', async ({ page }) => {
-  const button = page.getByRole('button', { name: 'Select 10-year plan for $500' });
+  const button = page.getByRole('button', { name: 'Select 10-year plan for $550' });
   await button.scrollIntoViewIfNeeded();
   const scrollY = await page.evaluate(() => window.scrollY);
   await button.click();
@@ -236,6 +256,9 @@ for (const plan of catalogue) {
     await expect(page.getByRole('heading', { name: 'You’re all set.' })).toBeVisible();
     expect(sentPlan.plan_name).toBe(plan.name);
     expect(sentPlan.plan_price).toBe(plan.price);
+    expect(sentPlan.original_price).toBe(plan.originalPrice);
+    expect(sentPlan.discount).toBe(plan.discount);
+    await expect(page.locator('#success-price')).toHaveText(plan.price);
   });
 }
 
