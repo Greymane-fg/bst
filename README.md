@@ -4,7 +4,7 @@ A complete, mobile-first single-page website recreated from the supplied screens
 
 ## What’s included
 
-- Green gradient header, three-step progress indicator, and all four reference plan cards.
+- Green gradient header, three-step progress indicator, and all four plan cards, with **Most Popular** on the $550 10-year plan.
 - Single-column mobile layout, two-column tablet layout, and four-column desktop layout.
 - Accessible application popup (mobile bottom sheet / desktop modal) requesting **name, email, and store URL**.
 - **Read-only plan name and plan price**, populated from the card selected. Email payload prices come from the immutable plan catalogue, never the form fields.
@@ -16,9 +16,9 @@ A complete, mobile-first single-page website recreated from the supplied screens
 | Plan | Original price | Discount | Final price (USD) |
 | --- | ---: | ---: | ---: |
 | 1 YEAR PLAN | $250 | $50 | **$200** |
-| 3 YEARS PLAN | $350 | $100 | **$250** |
-| 5 YEARS PLAN | $500 | $150 | **$350** |
-| 10 YEARS PLAN | $700 | $200 | **$500** |
+| 3 YEARS PLAN | $350 | $50 | **$300** |
+| 5 YEARS PLAN | $500 | $100 | **$400** |
+| 10 YEARS PLAN · Most Popular | $700 | $150 | **$550** |
 
 ## Run locally
 

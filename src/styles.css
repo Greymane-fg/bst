@@ -213,6 +213,27 @@ svg {
   transition: box-shadow 180ms ease, transform 180ms ease;
 }
 
+.plan-card--popular {
+  position: relative;
+  border-color: var(--green);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -14px;
+  left: 23px;
+  padding: 6px 12px;
+  border-radius: 100px;
+  background: var(--green);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .plan-card__topline {
   display: flex;
   justify-content: flex-end;
